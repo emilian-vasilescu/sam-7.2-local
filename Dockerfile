@@ -8,25 +8,12 @@ ENV DEBIAN_FRONTEND noninteractive
 
 
 RUN apt-get update -y --fix-missing
-RUN apt-get install wget apt-transport-https lsb-release ca-certificates -y
-RUN wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
-RUN echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list
-RUN apt-get update -y
+RUN apt-get install libzip-dev zlib1g-dev authbind curl libpq-dev -y
 RUN apt-get install apache2 default-mysql-client -y
-RUN apt-get install php7.2 -y
-RUN apt-get install php7.2-dev -y
-RUN apt-get install php7.2-xml -y
-RUN apt-get install php7.2-opcache -y
-RUN apt-get install php7.2-mysql -y
-RUN apt-get install php7.2-zip -y
-RUN apt-get install php7.2-curl -y
-RUN apt-get install libapache2-mod-php7.2 -y
-RUN apt-get install php7.2-mbstring -y
-RUN apt-get install php-pear -y
-RUN apt-get install curl -y
 RUN pecl install timecop-beta
 RUN echo "extension=timecop.so" >> /etc/php/7.2/cli/php.ini
 RUN php -v
+RUN docker-php-ext-install pdo pdo_mysql mysqli zip opcache sockets > /dev/null && \
 
 EXPOSE 80
 EXPOSE 3306
