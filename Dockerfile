@@ -1,4 +1,5 @@
-FROM debian:jessie
+#FROM debian:jessie
+FROM php:7.2-apache
 
 MAINTAINER Alexandru Voinescu "voinescu.alex@gmail.com"
 
@@ -8,11 +9,10 @@ ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update -y --fix-missing
 RUN apt-get install wget apt-transport-https lsb-release ca-certificates -y
-RUN echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list
 RUN wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
-RUN apt-key adv --keyserver ha.pool.sks-keyservers.net --recv-keys B188E2B695BD4743
+RUN echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list
 RUN apt-get update -y
-RUN apt-get install wget apache2 mysql-client -y
+RUN apt-get install apache2 mysql-client -y
 RUN apt-get install php7.2 -y
 RUN apt-get install php7.2-dev -y
 RUN apt-get install php7.2-xml -y
