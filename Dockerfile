@@ -13,7 +13,7 @@ RUN apt-get install libzip-dev zlib1g-dev authbind curl libpq-dev -y
 RUN apt-get install apache2 default-mysql-client -y
 RUN pecl install timecop-beta
 RUN echo "extension=timecop.so" >> /usr/local/etc/php/php.ini
-RUN docker-php-ext-install pdo pdo_mysql mysqli zip opcache sockets > /dev/null && \
+RUN docker-php-ext-install pdo pdo_mysql mysqli zip opcache sockets > /dev/null
 
 EXPOSE 80
 EXPOSE 3306
