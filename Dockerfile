@@ -12,7 +12,7 @@ RUN apt-get update -y --fix-missing
 RUN apt-get install libzip-dev zlib1g-dev authbind curl libpq-dev -y
 RUN apt-get install apache2 default-mysql-client -y
 RUN pecl install timecop-beta
-RUN echo "extension=timecop.so" >> /etc/php/7.2/cli/php.ini
+RUN echo "extension=timecop.so" >> /usr/local/etc/php/php.ini
 RUN docker-php-ext-install pdo pdo_mysql mysqli zip opcache sockets > /dev/null && \
 
 EXPOSE 80
@@ -43,8 +43,6 @@ RUN a2ensite local.sam.tool
 RUN echo '127.0.0.1 local.sam.tool' >> /etc/hosts
 RUN echo '127.0.0.1 mysql_tests_host' >> /etc/hosts
 RUN a2enmod rewrite
-RUN echo "extension=timecop.so" >> /etc/php/7.2/apache2/php.ini
-
 
 RUN curl -sS https://getcomposer.org/installer | php
 RUN chmod +x composer.phar
