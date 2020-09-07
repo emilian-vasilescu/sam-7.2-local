@@ -10,7 +10,7 @@ RUN php -v
 RUN php --ini
 RUN apt-get update -y --fix-missing
 RUN apt-get install libzip-dev zlib1g-dev authbind curl libpq-dev -y
-RUN apt-get install apache2 default-mysql-client -y
+RUN apt-get install apache2 mariadb-client -y
 RUN pecl install timecop-beta
 RUN echo "extension=timecop.so" >> /usr/local/etc/php/php.ini
 RUN docker-php-ext-install pdo pdo_mysql mysqli zip opcache sockets > /dev/null
@@ -21,7 +21,7 @@ EXPOSE 3306
 ENV MYSQL_ROOT_PASSWORD nopass
 RUN export MYSQL_ROOT_PASSWORD=nopass
 
-RUN apt-get install mysql-server -y
+RUN apt-get install mariadb-server -y
 WORKDIR /etc/mysql/
 RUN sed -i '/^bind-address		= 127.0.0.1$/s/^/#/' my.cnf
 RUN sed '/bind-address		= 127.0.0.1/a skip-name-resolve' my.cnf
