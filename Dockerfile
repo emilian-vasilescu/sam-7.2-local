@@ -6,13 +6,13 @@ MAINTAINER Alexandru Voinescu "voinescu.alex@gmail.com"
 # Setup environment
 ENV DEBIAN_FRONTEND noninteractive
 
-
+RUN php -v
+RUN php --ini
 RUN apt-get update -y --fix-missing
 RUN apt-get install libzip-dev zlib1g-dev authbind curl libpq-dev -y
 RUN apt-get install apache2 default-mysql-client -y
 RUN pecl install timecop-beta
 RUN echo "extension=timecop.so" >> /etc/php/7.2/cli/php.ini
-RUN php -v
 RUN docker-php-ext-install pdo pdo_mysql mysqli zip opcache sockets > /dev/null && \
 
 EXPOSE 80
